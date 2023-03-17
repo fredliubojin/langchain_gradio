@@ -1,5 +1,6 @@
 import gradio as gr
 import openai
+import os
 
 def set_api_key(api_key):
     openai.api_key = api_key
@@ -22,7 +23,9 @@ def chatbot(api_key, user_input, conversation_history=""):
     updated_conversation = f"{conversation_history}\nUser: {user_input}\nChatbot: {response}\n"
     return updated_conversation
 
-api_key_input = gr.inputs.Textbox(lines=1, label="Enter OpenAI API Key")
+# Get API key from environment variable OPENAI_API_KEY
+api_key = os.environ.get("OPENAI_API_KEY")
+api_key_input = gr.inputs.Textbox(lines=1, label="Enter OpenAI API Key", default=api_key)
 
 user_input = gr.inputs.Textbox(lines=3, label="Enter your message")
 
