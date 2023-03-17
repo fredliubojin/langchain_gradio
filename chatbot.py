@@ -2,25 +2,33 @@ import gradio as gr
 import openai
 import os
 
+import chat_agent
+from langchain.schema import (
+    AIMessage,
+    HumanMessage,
+    SystemMessage
+)
+
 def set_api_key(api_key):
     openai.api_key = api_key
     return "API Key set successfully."
 
-def generate_response(prompt, model="text-davinci-002"):
-    response = openai.Completion.create(
-        engine=model,
-        prompt=prompt,
-        max_tokens=150,
-        n=1,
-        stop=None,
-        temperature=0.8,
-    )
-    return response.choices[0].text.strip()
+def generate_response(prompt):
+    agent = chat_agent.create_agent()
+    response = agent.run(prompt)
+    return response.strip()
 
 def chatbot(api_key, user_input, conversation_history=""):
     set_api_key(api_key)
     response = generate_response(user_input)
-    updated_conversation = f"{conversation_history}\nUser: {user_input}\nChatbot: {response}\n"
+    # Iterate through messages in ChatMessageHistory and format the output
+    updated_conversation = ""
+    for message in chat_agent.memory.chat_memory.messages:
+        if isinstance(message, HumanMessage):
+            prefix = "User: "
+        else:
+            prefix = "Chatbot: "
+        updated_conversation += f"{prefix}{message.content}\n\n"
     return updated_conversation
 
 # Get API key from environment variable OPENAI_API_KEY
