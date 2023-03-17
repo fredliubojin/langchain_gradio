@@ -16,22 +16,25 @@ def generate_response(prompt, model="text-davinci-002"):
     )
     return response.choices[0].text.strip()
 
-def chatbot(api_key, user_input):
+def chatbot(api_key, user_input, conversation_history=""):
     set_api_key(api_key)
     response = generate_response(user_input)
-    return response
+    updated_conversation = f"{conversation_history}\nUser: {user_input}\nChatbot: {response}\n"
+    return updated_conversation, response
 
 api_key_input = gr.inputs.Textbox(lines=1, label="Enter OpenAI API Key")
 user_input = gr.inputs.Textbox(lines=3, label="Enter your message")
+conversation_history = gr.inputs.Textbox(lines=10, label="Conversation History")
 
-output = gr.outputs.Textbox(label="Chatbot Response")
+output_history = gr.outputs.Textbox(label="Updated Conversation")
+output_response = gr.outputs.Textbox(label="Chatbot Response")
 
 iface = gr.Interface(
     fn=chatbot,
-    inputs=[api_key_input, user_input],
-    outputs=output,
+    inputs=[api_key_input, user_input, conversation_history],
+    outputs=[output_history, output_response],
     title="GPT-4 Chatbot",
-    description="A simple chatbot using GPT-4 and Gradio",
+    description="A simple chatbot using GPT-4 and Gradio with conversation history",
 )
 
 iface.launch()
