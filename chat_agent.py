@@ -18,7 +18,7 @@ tools = [
     )
 ]
 memory = ConversationBufferMemory(memory_key="chat_history")
-llm=OpenAI(temperature=0, model_name="gpt-3.5-turbo")
+llm=OpenAI(temperature=0, model_name="text-davinci-003")
 
 def create_agent():
     agent_chain = initialize_agent(tools, llm, agent="conversational-react-description", verbose=True, memory=memory)
