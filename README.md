@@ -2,6 +2,12 @@
 
 Welcome to the **LiveQuery GPT-4** project! 🎉 This is a simple chatbot powered by OpenAI's GPT-4, LangChain framework, Gradio, and Google Custom Search API. It utlizes LangChain's ReAct Agent to enable GTP-4 based chat to have access to live Google search results.
 
+## Conversation Example
+### UI
+![Screenshot](./screenshots/screenshot.png)
+### LangChain reasoning for the same conversation
+![Screenshot](./screenshots/LangChain.png)
+
 ## Features & Roadmap 💡
 
 - [x] GPT-4 powered chatbot with LangChain framework 🤖

@@ -68,7 +68,7 @@ def main():
         fn=partial(get_response, chatbot),
         inputs=inputs,
         outputs=[output_history],
-        title="GPT-4 Chatbot",
+        title="LiveQuery GPT-4",
         description="A simple chatbot using GPT-4 and Gradio with conversation history",
         allow_flagging=False,
     )
