@@ -11,7 +11,7 @@ class ChatBot:
         self.agent = agent_chain
 
 
-def create_chatbot(model_name):
+def create_chatbot(model_name, seed_memory=None):
     search = GoogleSearchAPIWrapper()
     tools = [
         Tool(
@@ -25,7 +25,7 @@ def create_chatbot(model_name):
             description="useful for all question that are related to a particular topic, product, concept, or service",
         )
     ]
-    memory = ConversationBufferMemory(memory_key="chat_history")
+    memory = seed_memory if seed_memory is not None else ConversationBufferMemory(memory_key="chat_history")
     chat = ChatOpenAI(temperature=0, model_name=model_name)
     agent_chain = initialize_agent(tools, chat, agent="conversational-react-description", verbose=True, memory=memory)
 

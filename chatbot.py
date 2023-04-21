@@ -14,6 +14,13 @@ def set_api_key(api_key):
 
 def get_response(chatbot, api_key, selected_model, user_input, conversation_history=""):
     set_api_key(api_key)
+
+    # Preserve the memory of the current chatbot
+    preserved_memory = chatbot.memory
+
+    # Create a new chat agent based on the selected model and seed the memory
+    chatbot = chat_agent.create_chatbot(model_name=selected_model, seed_memory=preserved_memory)
+
     # Get raw chat response
     response = chatbot.agent.run(user_input).strip()
 
