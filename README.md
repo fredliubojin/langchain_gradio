@@ -32,21 +32,18 @@ git clone https://github.com/yourusername/gpt-4-langchain-conversational-assista
 pip install -r requirements.txt
 ```
 
-3. Set up your OpenAI API key as an environment variable:
-```
-export OPENAI_API_KEY="your_openai_api_key"
-```
+3. Create a [Google Programmable Search](https://programmablesearchengine.google.com) engine and copy the ID.
 
-4. Create a [Google Programmable Search](https://programmablesearchengine.google.com) engine and copy the ID.
-
-5. Enable the Custom Search API in your [GCP console](https://console.cloud.google.com/apis/api/customsearch.googleapis.com),
+4. Enable the Custom Search API in your [GCP console](https://console.cloud.google.com/apis/api/customsearch.googleapis.com),
    and create a GCP API key [here](https://console.cloud.google.com/apis/credentials).
 
-6. Set up the `GOOGLE_CSE_ID` and `GCP_API_KEY` environment variable:
+5. Create a `.env` file with all environment variables needed:
 ```
-export GOOGLE_CSE_ID="your_google_cse_id"
-export GCP_API_KEY="your_gcp_api_key"
+OPENAI_API_KEY="your_openai_api_key"
+GOOGLE_CSE_ID="your_google_programable_search_id"
+GOOGLE_API_KEY="your_gcp_api_key"
 ```
+
 ## Usage
 
 1. Run the server:
