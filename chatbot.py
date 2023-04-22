@@ -42,19 +42,19 @@ def get_response(chatbot, api_key, selected_model, user_input, conversation_hist
 def main():
     api_key = os.environ.get("OPENAI_API_KEY")
 
-    api_key_input = gr.inputs.Textbox(
+    api_key_input = gr.components.Textbox(
         lines=1,
         label="Enter OpenAI API Key",
-        default=api_key,
+        value=api_key,
     )
 
-    model_selection = gr.inputs.Dropdown(
+    model_selection = gr.components.Dropdown(
         choices=["gpt-4", "gpt-3.5-turbo"],
         label="Select a GPT Model",
-        default="gpt-3.5-turbo",
+        value="gpt-3.5-turbo",
     )
 
-    user_input = gr.inputs.Textbox(
+    user_input = gr.components.Textbox(
         lines=3,
         label="Enter your message",
     )
@@ -77,7 +77,7 @@ def main():
         outputs=[output_history],
         title="LiveQuery GPT-4",
         description="A simple chatbot using GPT-4 and Gradio with conversation history",
-        allow_flagging=False,
+        allow_flagging="never",
     )
 
     iface.launch()
