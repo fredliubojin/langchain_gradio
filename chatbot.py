@@ -10,6 +10,7 @@ from langchain.schema import (
 
 def set_api_key(api_key):
     openai.api_key = api_key
+    os.environ["OPENAI_API_KEY"] = api_key
     return "API Key set successfully."
 
 def get_response(chatbot, api_key, selected_model, user_input, conversation_history=""):
