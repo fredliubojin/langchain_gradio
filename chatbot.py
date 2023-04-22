@@ -46,6 +46,7 @@ def main():
         lines=1,
         label="Enter OpenAI API Key",
         value=api_key,
+        type="password",
     )
 
     model_selection = gr.components.Dropdown(
